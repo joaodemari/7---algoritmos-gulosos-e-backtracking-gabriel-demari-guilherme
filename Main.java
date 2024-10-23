@@ -19,24 +19,25 @@ public class Main {
         // System.out.println(resultado);
         
 
-        ArrayList<Intervalo> intervalos = new ArrayList<Intervalo>();
-        intervalos.add(new Intervalo(2, 4));
-        intervalos.add(new Intervalo(4, 5));
-        intervalos.add(new Intervalo(1, 6));
-        intervalos.add(new Intervalo(6, 7));
-        intervalos.add(new Intervalo(4, 8));
-        intervalos.add(new Intervalo(6, 9));
-        intervalos.add(new Intervalo(7, 10));
-        intervalos.add(new Intervalo(9, 11));
-        intervalos.add(new Intervalo(9, 12));        
-        intervalos.add(new Intervalo(3, 13));
-        intervalos.add(new Intervalo(13, 14));
+        // ArrayList<Intervalo> intervalos = new ArrayList<Intervalo>();
+        // intervalos.add(new Intervalo(2, 4));
+        // intervalos.add(new Intervalo(4, 5));
+        // intervalos.add(new Intervalo(1, 6));
+        // intervalos.add(new Intervalo(6, 7));
+        // intervalos.add(new Intervalo(4, 8));
+        // intervalos.add(new Intervalo(6, 9));
+        // intervalos.add(new Intervalo(7, 10));
+        // intervalos.add(new Intervalo(9, 11));
+        // intervalos.add(new Intervalo(9, 12));        
+        // intervalos.add(new Intervalo(3, 13));
+        // intervalos.add(new Intervalo(13, 14));
 
-        ArrayList<Intervalo> resultado = SDM_GULOSO(intervalos);
-        System.out.println(resultado);
-        System.out.println(resultado.size());
+        // ArrayList<Intervalo> resultado = SDM_GULOSO(intervalos);
+        // System.out.println(resultado);
+        // System.out.println(resultado.size());
 
         eniRainhas(10);
+        
 
     }
 
@@ -73,20 +74,29 @@ public class Main {
     public static ArrayList<Posicao> eniRainhas(int n){
         if(n <= 2) return null;
 
-        ArrayList<Posicao> rainhas = new ArrayList<>();
+       ArrayList<Posicao> MelhoresRainhas = new ArrayList<>();
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                Posicao p = new Posicao(i, j);
-                if(!rainhasNaRedondeza(rainhas, p)) {
-                    rainhas.add(p);
+        for(int l = 0; l < n; l++){
+            for(int k = 0; k< n; k++){
+                ArrayList<Posicao> rainhas = new ArrayList<>();
+                Posicao initialP = new Posicao(l, k);
+                rainhas.add(initialP);
+                for (int i = 0; i < n; i++) {
+                    for (int j = 0; j < n; j++) {
+                        Posicao p = new Posicao(i, j);
+                        if(!rainhasNaRedondeza(rainhas, p)) {
+                            rainhas.add(p);
+                        }
+                    }
                 }
+                if(rainhas.size() > MelhoresRainhas.size())
+                    MelhoresRainhas = rainhas;
             }
         }
 
-        System.out.println(rainhas);
+        System.out.println(MelhoresRainhas);
 
-        return rainhas;
+        return MelhoresRainhas;
     }
 
     private static boolean rainhasNaRedondeza(ArrayList<Posicao> rainhas, Posicao p1) {
